@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No profundo da Floresta Encantada...</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Raleway:wght@300;500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background: linear-gradient(to bottom, #000428, #004e92);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: white;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            padding: 20px;
+            background: rgba(19, 34, 52, 0.85);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 3px solid #7f00ff;
+            width: 90%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: #ffcc00;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+        }
+
+        .card-container {
+            height: 180px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            font-size: 1.3em;
+            color: #d9e4ff;
+            background: rgba(19, 52, 68, 0.7);
+            padding: 25px;
+            border: 2px solid #b8ffeb;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            text-align: center;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1.1em;
+            background-color: #7f00ff;
+            color: #fff;
+            border: 2px solid #00f260;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Cinzel', serif;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #4a00e0;
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .butterflies {
+            position: absolute;
+            bottom: 10%;
+            right: 10%;
+            pointer-events: none;
+        }
+
+        .butterfly {
+            width: 60px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                width: 100%;
+            }
+
+            .card {
+                font-size: 1.1em;
+                padding: 15px;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>No profundo da Floresta Encantada...</h1>
+        <div class="card-container">
+            <div id="card" class="card">Clique em "Nova Carta"!</div>
+        </div>
+        <div class="buttons">
+            <button onclick="novaCarta()">Nova Carta</button>
+            <button onclick="cartaMagica()">Carta Mágica</button>
+        </div>
+        <div class="butterflies">
+            <img class="butterfly" src="https://img.icons8.com/color/48/000000/butterfly.png" alt="Borboleta" />
+            <img class="butterfly" src="https://img.icons8.com/color/48/000000/butterfly.png" alt="Borboleta" />
+        </div>
+    </div>
+
+    <script>
+        const perguntasMatematicas = [
+            'Quanto é 5 + 3?', 'Quanto é 12 - 4?', 'Quanto é 7 x 6?', 'Quanto é 16 ÷ 4?',
+            'Quanto é 9 + 8?', 'Quanto é 15 - 9?', 'Quanto é 8 x 7?', 'Quanto é 20 ÷ 5?',
+            'Quanto é 6 + 12?', 'Quanto é 18 - 11?', 'Quanto é 9 x 9?', 'Quanto é 24 ÷ 3?',
+            'Quanto é 5 + 15?', 'Quanto é 10 - 5?', 'Quanto é 11 x 6?', 'Quanto é 30 ÷ 6?',
+            'Quanto é 3 + 5?', 'Quanto é 14 - 6?', 'Quanto é 10 x 2?', 'Quanto é 32 ÷ 8?',
+            'Quanto é 8 + 6?', 'Quanto é 25 - 10?', 'Quanto é 4 x 7?', 'Quanto é 56 ÷ 7?',
+            'Quanto é 1 + 1?', 'Quanto é 20 - 5?', 'Quanto é 3 x 4?', 'Quanto é 12 ÷ 3?',
+            'Quanto é 5 + 9?', 'Quanto é 16 - 7?', 'Quanto é 2 x 9?', 'Quanto é 18 ÷ 2?',
+            'Quanto é 7 + 3?', 'Quanto é 21 - 8?', 'Quanto é 6 x 6?', 'Quanto é 36 ÷ 6?',
+            'Quanto é 2 + 2?', 'Quanto é 15 - 5?', 'Quanto é 5 x 5?', 'Quanto é 25 ÷ 5?',
+            'Quanto é 13 + 7?', 'Quanto é 30 - 12?', 'Quanto é 9 x 4?', 'Quanto é 36 ÷ 9?',
+            'Quanto é 4 + 4?', 'Quanto é 14 - 3?', 'Quanto é 3 x 5?', 'Quanto é 15 ÷ 3?',
+            'Quanto é 10 + 10?', 'Quanto é 40 - 20?', 'Quanto é 2 x 6?', 'Quanto é 12 ÷ 4?',
+            'Quanto é 5 + 5?', 'Quanto é 50 - 25?', 'Quanto é 7 x 3?', 'Quanto é 21 ÷ 3?',
+            'Quanto é 8 + 8?', 'Quanto é 28 - 7?', 'Quanto é 6 x 4?', 'Quanto é 24 ÷ 4?',
+            'Quanto é 9 + 1?', 'Quanto é 20 - 10?', 'Quanto é 3 x 3?', 'Quanto é 9 ÷ 3?',
+            'Quanto é 11 + 4?', 'Quanto é 25 - 5?', 'Quanto é 2 x 7?', 'Quanto é 14 ÷ 2?',
+            'Quanto é 3 + 6?', 'Quanto é 22 - 11?', 'Quanto é 4 x 5?', 'Quanto é 20 ÷ 5?',
+            'Quanto é 10 + 5?', 'Quanto é 35 - 15?', 'Quanto é 8 x 2?', 'Quanto é 16 ÷ 2?',
+            'Quanto é 6 + 6?', 'Quanto é 18 - 9?', 'Quanto é 5 x 3?', 'Quanto é 15 ÷ 5?',
+            'Quanto é 2 + 3?', 'Quanto é 12 - 6?', 'Quanto é 9 x 2?', 'Quanto é 18 ÷ 9?',
+            'Quanto é 7 + 2?', 'Quanto é 10 - 4?', 'Quanto é 3 x 2?', 'Quanto é 6 ÷ 2?',
+            'Quanto é 8 + 3?', 'Quanto é 17 - 8?', 'Quanto é 4 x 4?', 'Quanto é 16 ÷ 4?',
+            'Quanto é 1 + 3?', 'Quanto é 5 - 2?', 'Quanto é 2 x 5?', 'Quanto é 10 ÷ 5?',
+            'Quanto é 15 + 5?', 'Quanto é 45 - 30?', 'Quanto é 6 x 3?', 'Quanto é 18 ÷ 6?',
+            'Quanto é 3 + 7?', 'Quanto é 30 - 15?', 'Quanto é 5 x 2?', 'Quanto é 10 ÷ 2?',
+            'Quanto é 4 + 6?', 'Quanto é 24 - 12?', 'Quanto é 7 x 5?', 'Quanto é 35 ÷ 7?',
+            'Quanto é 9 + 6?', 'Quanto é 60 - 40?', 'Quanto é 2 x 3?', 'Quanto é 6 ÷ 3?',
+            'Quanto é 3 + 8?', 'Quanto é 50 - 20?', 'Quanto é 10 x 3?', 'Quanto é 30 ÷ 10?',
+            'Quanto é 1 + 4?', 'Quanto é 12 - 8?', 'Quanto é 2 x 8?', 'Quanto é 16 ÷ 2?',
+            'Quanto é 5 + 7?', 'Quanto é 15 - 10?', 'Quanto é 4 x 6?', 'Quanto é 24 ÷ 6?',
+            'Quanto é 8 + 1?', 'Quanto é 14 - 5?', 'Quanto é 3 x 4?', 'Quanto é 12 ÷ 4?'
+        ];
+
+        const cartasMagicas = [
+            'Você encontrou um atalho místico! Avance 2 casas imediatamente.',
+            'Um feitiço de sono profundo te paralisa! Fique 2 rodadas sem jogar.',
+            'Uma fada da noite te ajuda a escapar! Jogue novamente.',
+            'Você escorregou em um lago encantado! Volte 3 casas.',
+            'Uma árvore anciã revelou um segredo. Avance 1 casa.',
+            'Um espírito da floresta te empurra adiante! Avance 4 casas.',
+            'Um redemoinho mágico te puxou! Volte 2 casas.',
+            'Você encontrou um relógio antigo! Pule sua próxima rodada, mas avance 1 casa depois.',
+            'Os ventos da floresta sussurram seu nome! Avance 3 casas.',
+            'Você foi capturado por elfos travessos! Fique 1 rodada sem jogar.',
+            'Uma brisa suave traz uma bênção. Avance 2 casas.',
+            'Você encontra uma poção mágica. Avance 5 casas.',
+            'Uma sombra te impede de avançar! Fique 1 rodada sem jogar.',
+            'Um bicho-preguiça te ajuda! Jogue novamente.',
+            'Uma luz brilhante te guia. Avance 2 casas.',
+            'Um corvo sábio te dá um conselho. Volte 1 casa.',
+            'Você encontrou um tesouro escondido! Avance 3 casas.',
+            'Uma névoa misteriosa te envolve. Volte 4 casas.',
+            'Um dragão antigo te protege! Avance 5 casas.',
+            'Uma flor mágica cresce no seu caminho. Avance 1 casa.',
+            'Um grilo fala com você. Fique 1 rodada sem jogar.',
+            'Você se teletransportou! Avance 3 casas imediatamente.',
+            'Um espírito brincalhão te ajuda a avançar! Avance 4 casas.',
+            'Uma tempestade mágica te atrapalha! Fique 2 rodadas sem jogar.',
+            'Uma estrela cadente traz sorte! Avance 6 casas.',
+            'Uma árvore dançante te faz rir. Avance 2 casas.',
+            'Um gato preto te oferece um truque. Jogue novamente.',
+            'Você descobre um portal mágico. Avance 4 casas.',
+            'Um lobo uivante te acompanha. Volte 3 casas.',
+            'Uma bruxa bondosa te concede um desejo. Avance 5 casas.',
+            'Um manto invisível te protege. Fique 1 rodada sem jogar.',
+            'Uma canção encantada faz você dançar. Avance 2 casas.',
+            'Um espírito gentil oferece um presente. Avance 3 casas.',
+            'Uma criatura mágica te leva a um atalho! Avance 5 casas.',
+            'Você encontra uma bússola mágica. Avance 2 casas.',
+            'Um anjo da guarda te protege. Fique 1 rodada sem jogar.',
+            'Um fênix ressurge ao seu lado. Avance 3 casas.',
+            'Uma poção de invisibilidade te ajuda! Avance 4 casas.',
+            'Uma chuva de estrelas faz você brilhar! Avance 2 casas.',
+            'Você descobre um caminho secreto. Avance 5 casas.',
+            'Um amor verdadeiro te guia. Fique 2 rodadas sem jogar.',
+            'Uma flor encantada abre um portal. Avance 3 casas.',
+            'Um tesouro brilhante chama sua atenção. Avance 6 casas.',
+            'Uma energia mágica envolve você. Volte 2 casas.',
+            'Um espírito brincalhão te faz rir! Jogue novamente.',
+            'Um eco distante te ensina um truque. Avance 2 casas.',
+            'Você descobre um lago encantado. Avance 1 casa.',
+            'Um mapa antigo te mostra o caminho. Avance 4 casas.',
+            'Um amuleto poderoso te protege! Fique 1 rodada sem jogar.',
+            'Uma sombra suave te guia. Avance 3 casas.',
+            'Uma música suave acalma sua mente. Avance 2 casas.',
+            'Um gênio te oferece um desejo. Avance 5 casas.',
+            'Um sonho mágico se torna realidade! Avance 3 casas.',
+            'Uma chuva de pétalas te envolve. Avance 1 casa.',
+            'Um dragão amigo te ajuda a voar! Avance 4 casas.',
+            'Um cristal brilha ao seu redor. Fique 1 rodada sem jogar.',
+            'Um manto encantado te dá velocidade. Avance 3 casas.',
+            'Uma porta secreta se abre para você. Avance 5 casas.',
+            'Um baú mágico revela um segredo. Avance 2 casas.'
+        ];
+
+        let cartasUsadas = [];
+
+        function novaCarta() {
+            if (perguntasMatematicas.length === 0) {
+                document.getElementById('card').innerHTML = 'Sem mais perguntas...';
+                return;
+            }
+            const index = Math.floor(Math.random() * perguntasMatematicas.length);
+            const pergunta = perguntasMatematicas.splice(index, 1)[0];
+            document.getElementById('card').innerHTML = pergunta;
+        }
+
+        function cartaMagica() {
+            const index = Math.floor(Math.random() * cartasMagicas.length);
+            const cartaMagica = cartasMagicas[index];
+            document.getElementById('card').innerHTML = cartaMagica;
+        }
+    </script>
+</body>
+</html>
